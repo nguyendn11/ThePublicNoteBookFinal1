@@ -1,0 +1,141 @@
+﻿@model ThePublicNoteBook.Models.Article
+@Scripts.Render("~/bundles/ckeditor")
+@Scripts.Render("~/bundles/ckfinder")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title></title>
+    <!-- Favicon-->
+    <link rel="icon" href="/Assets/favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <!-- Bootstrap Core Css -->
+    <link href="/Assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Waves Effect Css -->
+    <link href="/Assets/plugins/node-waves/waves.css" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link href="/Assets/plugins/animate-css/animate.css" rel="stylesheet" />
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="/Assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <!-- Bootstrap DatePicker Css -->
+    <link href="/Assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <!-- Wait Me Css -->
+    <link href="/Assets/plugins/waitme/waitMe.css" rel="stylesheet" />
+    <!-- Bootstrap Select Css -->
+    <link href="/Assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <!-- Custom Css -->
+    <link href="/Assets/css/style.css" rel="stylesheet">
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="/Assets/css/themes/all-themes.css" rel="stylesheet" />
+</head>
+<body>
+    <br />
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>Create New NoteBook</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                    <div class="card">
+                        <div class="body">
+                            <h2 class="card-inside-title">Title</h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @using (Html.BeginForm(null, null, FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <h2 class="card-inside-title">Description</h2>
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @playholder = "Description" } })
+                                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <h2 class="card-inside-title">Content</h2>
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+
+                                                    @Html.CheckBoxFor(model => model.Active)
+
+
+
+                                                </div>
+                                            </div>
+                                            @*@Html.CheckBoxFor(model => model.Active)*@
+                                            <div class="form-group">
+                                                <div>
+                                                    <button type="submit" class="btn btn-primary m-t-15 waves-effect" />Save
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    @ViewBag.Message
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div>
+                                        @Html.ActionLink("Back to List", "Index")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script src="/Assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="/Assets/plugins/bootstrap/js/bootstrap.js"></script>
+    <!-- Select Plugin Js -->
+    <script src="/Assets/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <!-- Slimscroll Plugin Js -->
+    <script src="/Assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <!-- Waves Effect Plugin Js -->
+    <script src="/Assets/plugins/node-waves/waves.js"></script>
+    <!-- Autosize Plugin Js -->
+    <script src="/Assets/plugins/autosize/autosize.js"></script>
+    <!-- Moment Plugin Js -->
+    <script src="/Assets/plugins/momentjs/moment.js"></script>
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="/Assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Bootstrap Datepicker Plugin Js -->
+    <script src="/Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <!-- Custom Js -->
+    <script src="/Assets/js/admin.js"></script>
+    <script src="/Assets/js/pages/forms/basic-form-elements.js"></script>
+    <!-- Demo Js -->
+    <script src="/Assets/js/demo.js"></script>
+</body>
+</html>
+
+<script>
+    CKEDITOR.replace("Content");
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

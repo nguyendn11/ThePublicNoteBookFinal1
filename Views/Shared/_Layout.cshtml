@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/DataTables")
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <!-- Bootstrap Core Css -->
+    <!-- Waves Effect Css -->
+    <link href="~/Assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="/Assets/plugins/node-waves/waves.css" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link href="/Assets/plugins/animate-/Assets/css/animate.css" rel="stylesheet" />
+    <!-- Morris Chart Css-->
+    <link href="/Assets/plugins/morrisjs/morris.css" rel="stylesheet" />
+    <!-- Custom Css -->
+    <link href="/Assets/css/style.css" rel="stylesheet">
+    <!-- AdminBSB Themes. You can choose a theme from /Assets/css/themes instead of get all themes -->
+    <link href="/Assets/css/themes/all-themes.css" rel="stylesheet" />
+</head>
+<body class="theme-red">
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">@Html.ActionLink("The Public NoteBook", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a href="@Url.Action("Register","Home")" class="dropdown-toggle"><h5>Register </h5></a>
+
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Login","Home")"><h5>Login</h5></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index","Article")" class="navbar-brand">
+                            <h5>My NoteBook</h5>
+                        </a>
+
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="material-icons">view_list</i>
+                                <span>@Session["Name"]</span>
+
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">@Session["Name"]</li>
+                                <li class="body">
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="@Url.Action("Profile","Home")">
+                                                <div class="icon-circle bg-orange">
+                                                    <i class="material-icons">mode_edit</i>
+                                                </div>
+                                                <div class="menu-info">
+                                                    <h4>Update Information</h4>
+                                                    <p>
+                                                        <i class="material-icons"></i>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Logout","Home")">
+                                                <div class="icon-circle bg-orange">
+                                                    <i class="material-icons">mode_edit</i>
+                                                </div>
+                                                <div class="menu-info">
+                                                    <h4>Logout</h4>
+                                                    <p>
+                                                        <i class="material-icons"></i>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <!-- Jquery Core Js -->
+    <script src="/Assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="/Assets/plugins/bootstrap/js/bootstrap.js"></script>
+    <!-- Select Plugin Js -->
+    <script src="/Assets/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <!-- Slimscroll Plugin Js -->
+    <script src="/Assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <!-- Waves Effect Plugin Js -->
+    <script src="/Assets/plugins/node-waves/waves.js"></script>
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="/Assets/plugins/jquery-countto/jquery.countTo.js"></script>
+    <!-- Morris Plugin Js -->
+    <script src="/Assets/plugins/raphael/raphael.min.js"></script>
+    <script src="/Assets/plugins/morrisjs/morris.js"></script>
+    <!-- ChartJs -->
+    <script src="/Assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Flot Charts Plugin Js -->
+    <script src="/Assets/plugins/flot-charts/jquery.flot.js"></script>
+    <script src="/Assets/plugins/flot-charts/jquery.flot.resize.js"></script>
+    <script src="/Assets/plugins/flot-charts/jquery.flot.pie.js"></script>
+    <script src="/Assets/plugins/flot-charts/jquery.flot.categories.js"></script>
+    <script src="/Assets/plugins/flot-charts/jquery.flot.time.js"></script>
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="/Assets/plugins/jquery-sparkline/jquery.sparkline.js"></script>
+    <!-- Custom Js -->
+    <script src="/Assets/js/admin.js"></script>
+    <script src="/Assets/js/pages/index.js"></script>
+    <!-- Demo Js -->
+    <script src="/Assets/js/demo.js"></script>
+</body>
+</html>

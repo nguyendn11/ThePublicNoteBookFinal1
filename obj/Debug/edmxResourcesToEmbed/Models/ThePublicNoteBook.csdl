@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThePublicNoteBookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ArticleLike">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ArticleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Article" Relationship="Self.FK_ArticleLikes_Articles" FromRole="ArticleLikes" ToRole="Articles" />
+    <NavigationProperty Name="User" Relationship="Self.FK_ArticleLikes_Users" FromRole="ArticleLikes" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateUp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Views" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ArticleLikes" Relationship="Self.FK_ArticleLikes_Articles" FromRole="Articles" ToRole="ArticleLikes" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Articles_Users" FromRole="Articles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Picture">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Pictures_Users" FromRole="Pictures" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UserLevel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LevelName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserLevels" FromRole="UserLevels" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Avatar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="LevelId" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ArticleLikes" Relationship="Self.FK_ArticleLikes_Users" FromRole="Users" ToRole="ArticleLikes" />
+    <NavigationProperty Name="Articles" Relationship="Self.FK_Articles_Users" FromRole="Users" ToRole="Articles" />
+    <NavigationProperty Name="Pictures" Relationship="Self.FK_Pictures_Users" FromRole="Users" ToRole="Pictures" />
+    <NavigationProperty Name="UserLevel" Relationship="Self.FK_Users_UserLevels" FromRole="Users" ToRole="UserLevels" />
+  </EntityType>
+  <Association Name="FK_ArticleLikes_Articles">
+    <End Role="Articles" Type="Self.Article" Multiplicity="1" />
+    <End Role="ArticleLikes" Type="Self.ArticleLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleLikes">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleLikes_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="ArticleLikes" Type="Self.ArticleLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleLikes">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Articles_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Articles" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Articles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pictures_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Pictures" Type="Self.Picture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pictures">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_UserLevels">
+    <End Role="UserLevels" Type="Self.UserLevel" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserLevels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="LevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ThePublicNoteBookEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ArticleLikes" EntityType="Self.ArticleLike" />
+    <EntitySet Name="Articles" EntityType="Self.Article" />
+    <EntitySet Name="Pictures" EntityType="Self.Picture" />
+    <EntitySet Name="UserLevels" EntityType="Self.UserLevel" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_ArticleLikes_Articles" Association="Self.FK_ArticleLikes_Articles">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="ArticleLikes" EntitySet="ArticleLikes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleLikes_Users" Association="Self.FK_ArticleLikes_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ArticleLikes" EntitySet="ArticleLikes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Articles_Users" Association="Self.FK_Articles_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Articles" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pictures_Users" Association="Self.FK_Pictures_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Pictures" EntitySet="Pictures" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_UserLevels" Association="Self.FK_Users_UserLevels">
+      <End Role="UserLevels" EntitySet="UserLevels" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

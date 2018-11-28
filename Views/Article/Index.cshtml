@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ThePublicNoteBook.Models.Article>
+<br />
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h3>My NoteBook</h3>
+            </div>
+            <div class="body table-responsive">
+                <p>
+                    @Html.ActionLink("Create New NoteBook", "Create")
+                </p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="bg-pink">
+                            <th>
+                                @Html.DisplayNameFor(model => model.Title)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateUp)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Views)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Active)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @item.DateUp.ToString("dd/MM/yyyy HH:mm")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Views)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Active)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Detail", "Detail", new { id = item.Id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>@TempData["Message"]</p>

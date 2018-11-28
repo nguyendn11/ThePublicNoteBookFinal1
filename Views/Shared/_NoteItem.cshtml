@@ -1,0 +1,23 @@
+﻿@model ThePublicNoteBook.Models.Article
+
+<tr>
+    <td>
+        @Model.User.FullName
+    </td>
+    <td>
+        @Model.Title
+    </td>
+    <td>
+        @Model.Description
+    </td>
+    <td>
+        @Model.DateUp.Date.ToString("dd MMM yyyy")
+    </td>
+    <td>
+        @Model.Views
+    </td>
+    <td>
+        <a href="@Url.Action("Edit","Article", new { id = Model.Id })">Edit</a> |
+        <a href="@Url.Action("Details","Home",new { id=Model.Id})">Detail</a>
+    </td>
+</tr>

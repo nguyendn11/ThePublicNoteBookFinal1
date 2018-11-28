@@ -1,0 +1,81 @@
+﻿@model ThePublicNoteBook.Models.Article
+
+@{
+    ViewBag.Title = "Details";
+}
+<br />
+<br />
+<br />
+<div class="card">
+    <div class="header">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                <h3><span class="label label-info">@Html.DisplayNameFor(model => model.Title)</span></h3>
+            </dt>
+
+            <dd>
+                <h3>@Html.DisplayFor(model => model.Title)</h3>
+            </dd>
+        </dl>
+    </div>
+    <div class="body">
+        <dl class="dl-horizontal">
+            <dt>
+                <h4>@Html.DisplayNameFor(model => model.Description)</h4>
+            </dt>
+
+            <dd>
+                <h4>@Html.DisplayFor(model => model.Description)</h4>
+            </dd>
+
+            <dt>
+                <h4>@Html.DisplayNameFor(model => model.Content)
+            </dt>
+
+            <dd>
+                <h4>@Html.Raw(Model.Content)
+
+
+            </dd>
+
+            <dt>
+                <h4>@Html.DisplayNameFor(model => model.DateUp)
+            </dt>
+
+            <dd>
+                <h4> @Html.DisplayFor(model => model.DateUp)
+            </dd>
+
+            <dt>
+                <h4>@Html.DisplayNameFor(model => model.Views)
+            </dt>
+
+            <dd>
+                <h4>@Html.DisplayFor(model => model.Views)
+            </dd>
+
+            <dt>
+                <h4>@Html.DisplayNameFor(model => model.Active)
+            </dt>
+
+            <dd>
+                <h4>@Html.DisplayFor(model => model.Active)
+            </dd>
+
+            <dt>
+                <h4>@Html.DisplayNameFor(model => model.User.UserName)
+            </dt>
+
+            <dd>
+                <h4>@Html.DisplayFor(model => model.User.UserName)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+
+</p>

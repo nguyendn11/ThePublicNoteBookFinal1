@@ -1,0 +1,105 @@
+﻿@model PagedList.IPagedList<ThePublicNoteBook.Models.Article>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Home Page";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title></title>
+</head>
+<body class="theme-red">
+    <br />
+    <br />
+    <div class="row clearfix">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-pink hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">playlist_add_check</i>
+                </div>
+                <div class="content">
+                    <div class="text">Notes</div>
+                    <div class="number count-to" data-from="0" data-to="@ViewBag.Total" data-speed="15" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-orange hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">person_add</i>
+                </div>
+                <div class="content">
+                    <div class="text">User</div>
+                    <div class="number count-to" data-from="0" data-to="@ViewBag.TotalUser" data-speed="600" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box hover-zoom-effect">
+                <div class="icon bg-light-blue">
+                    <i class="material-icons">access_alarm</i>
+                </div>
+                <div class="content">
+                    <div class="text">Day of Month</div>
+                    <div class="number">@DateTime.Now.Day</div>.
+                </div>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("searchText", ViewBag.Search as String, new { @class = "form-control col-md-2 m-right" })
+        <input type="submit" value="Search" class="btn btn-default" />
+    }
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h3>All Note Book</h3>
+                </div>
+                <div>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table table-bordered" id="example">
+                        <thead>
+                            <tr class="bg-pink">
+                                <th>
+                                    Writer
+                                </th>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <th>
+                                    DateUp
+                                </th>
+                                <th>
+                                    View
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                @Html.Partial("_NoteItem", item)
+                            }
+                        </tbody>
+                    </table>
+                    @{
+                        var start = (Model.PageNumber - 1) * Model.PageSize + 1;
+                        var end = start + Model.Count - 1;
+                    }
+                    Record(s): @start - @end / @Model.TotalItemCount
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = ViewBag.Search }))
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
