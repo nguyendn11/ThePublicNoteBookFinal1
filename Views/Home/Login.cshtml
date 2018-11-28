@@ -23,7 +23,7 @@
         <div class="logo">
             <a href="javascript:void(0);">The NoteBook</b></a>
         </div>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Login","Home"))
         {
             @Html.AntiForgeryToken()
             <div class="card">

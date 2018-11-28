@@ -20,8 +20,8 @@ namespace ThePublicNoteBook.Controllers
         // GET: Home
         public ActionResult Index(int? page, string search, string searchText)
         {
-            db.Articles.Add(new Article() { });
-            var articles = (from a in db.Articles.AsEnumerable()
+            db.Articles.Add(new Article() { });                                                                 //Tạo constructor
+            var articles = (from a in db.Articles.AsEnumerable()                                                //Lấy ra các notebook khi đã được active
                             where Filter(a)
                             orderby a.Id descending
                             select a);
@@ -75,8 +75,6 @@ namespace ThePublicNoteBook.Controllers
                     db.Users.Add(data);
                     db.SaveChanges();
                     Session["Name"] = data.UserName;
-
-
                     FormsAuthentication.SetAuthCookie(data.Id.ToString(), false);
                     return RedirectToAction("Login");
                 }
@@ -101,7 +99,7 @@ namespace ThePublicNoteBook.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Login([Bind(Include = "UserName,Password")]User data)
         {
             //check login

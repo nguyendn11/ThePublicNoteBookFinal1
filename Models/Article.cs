@@ -18,8 +18,7 @@ namespace ThePublicNoteBook.Models
         public Article()
         {
             this.ArticleLikes = new HashSet<ArticleLike>();
-        }
-    
+        }    
         public int Id { get; set; }
         public string Title { get; set; }
         public string Image { get; set; }
